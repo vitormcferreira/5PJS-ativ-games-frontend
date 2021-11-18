@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
-// criando uma tag estilizada
-export const Title = styled.h1`
-  color: blue;
+export const Form = styled.form`
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 
-  /* small dentro de Title */
-  small {
-    font-size: 12pt;
-    margin-left: 15px;
-    color: #999;
+  input {
+    font-size: 18px;
+    margin-bottom: 20px;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
   }
 `;
-
-// criando uma tag não estilizada
-export const Paragrafo = styled.p``;
