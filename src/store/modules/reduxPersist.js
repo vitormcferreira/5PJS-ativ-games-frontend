@@ -4,10 +4,9 @@ import { persistReducer } from 'redux-persist';
 export default (reducers) => {
   const persistedReducers = persistReducer(
     {
-      // nome da aplicação
-      key: 'REACT-BASE',
+      key: 'JogoDaMemoria',
       storage,
-      whitelist: ['auth'],
+      whitelist: ['auth', 'jogo'],
     },
     reducers
   );
