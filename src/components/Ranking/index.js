@@ -1,5 +1,7 @@
 import React from 'react';
+import { FaCircle } from 'react-icons/fa';
 import axios from '../../services/axios';
+import { TabelaRanking } from './styled';
 
 export default function Ranking() {
   const [ranking, setRanking] = React.useState({
@@ -18,12 +20,13 @@ export default function Ranking() {
   }, []);
 
   return (
-    <table>
-      <caption>Ranking</caption>
+    <TabelaRanking>
       <thead>
         <tr>
-          <th>Usuario</th>
-          <th>Erros</th>
+          <th>Ranking</th>
+          <th>
+            <FaCircle size={40} />
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -34,6 +37,6 @@ export default function Ranking() {
           </tr>
         ))}
       </tbody>
-    </table>
+    </TabelaRanking>
   );
 }
