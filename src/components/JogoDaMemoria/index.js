@@ -1,35 +1,55 @@
 import React from 'react';
-import axios from '../../services/axios';
+import { useDispatch, useSelector } from 'react-redux';
 import { Cartas, Carta } from './styled';
+import * as actions from '../../store/modules/jogo/actions';
 
 export default function JogoDaMemoria() {
-  const [jogo, setJogo] = React.useState([]);
+  const dispatch = useDispatch();
+  const jogo = useSelector((state) => state.jogo.jogo);
 
-  const handleObterCartas = async () => {
-    const response = await axios.get('jogo_da_memoria/');
-    setJogo(response.data.jogo.parsed_cartas);
-  };
+  let movimentos = [null, null];
 
-  // const fazerMovimento = (e) => {};
+  const handleSelecionarCarta = (target) => {
+    const carta = target.getAttribute('value');
+    const disabled = target.getAttribute('disabled') !== null;
 
-  const handleReiniciarJogo = async () => {
-    await axios.delete('jogo_da_memoria/');
-    await handleObterCartas();
+    if (disabled) {
+      return;
+    }
+
+    const mov = [...movimentos];
+    if (movimentos[0] === null) {
+      mov[0] = carta;
+    } else if (movimentos[1] === null && movimentos[0] !== carta) {
+      mov[1] = carta;
+    }
+    movimentos = mov;
+
+    // ao selecionar 2 cartas faz o movimento
+    if (movimentos[0] && movimentos[1]) {
+      dispatch(
+        actions.fazerMovimentoRequest({
+          carta1: movimentos[0],
+          carta2: movimentos[1],
+        })
+      );
+      movimentos = [null, null];
+    }
   };
 
   return (
-    <>
-      <Cartas>
-        {jogo.map((carta) => (
-          <Carta key={carta}>{carta}</Carta>
-        ))}
-      </Cartas>
-      <button type="button" onClick={handleObterCartas}>
-        iniciar jogo
-      </button>
-      <button type="button" onClick={handleReiniciarJogo}>
-        resetar jogo
-      </button>
-    </>
+    <Cartas>
+      {jogo.parsed_cartas.map((carta) => (
+        <Carta
+          key={carta[0]}
+          className="card"
+          value={carta[0]}
+          disabled={carta[2]}
+          onClick={(e) => handleSelecionarCarta(e.target)}
+        >
+          {carta[0]} {carta[1]}
+        </Carta>
+      ))}
+    </Cartas>
   );
 }
