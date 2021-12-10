@@ -1,7 +1,11 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Cartas, Carta } from './styled';
 import * as actions from '../../store/modules/jogo/actions';
+
+import imagens from './imagens';
 
 export default function JogoDaMemoria() {
   const dispatch = useDispatch();
@@ -39,15 +43,22 @@ export default function JogoDaMemoria() {
 
   return (
     <Cartas>
+      {/* carta[0] => valor da carta (número único)
+          carta[1] => número da carta (identifica um par)
+          carta[2] => se ela foi encontrada (bool) */}
       {jogo.parsed_cartas.map((carta) => (
-        <Carta
-          key={carta[0]}
-          className="card"
-          data-valor-carta={carta[0]}
-          data-carta-encontrada={carta[2]}
-          onClick={(e) => handleSelecionarCarta(e.target)}
-        >
-          {carta[0]} {carta[1]}
+        <Carta key={carta[0]} className="card">
+          {carta[1] !== null ? (
+            <img alt="" src={imagens[carta[1]].url} />
+          ) : (
+            <></>
+          )}
+          <div
+            data-valor-carta={carta[0]}
+            data-carta-encontrada={carta[2]}
+            onClick={(e) => handleSelecionarCarta(e.target)}
+            className="overlay"
+          />
         </Carta>
       ))}
     </Cartas>
