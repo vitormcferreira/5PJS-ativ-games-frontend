@@ -10,18 +10,18 @@ export default function JogoDaMemoria() {
   let movimentos = [null, null];
 
   const handleSelecionarCarta = (target) => {
-    const carta = target.getAttribute('value');
-    const disabled = target.getAttribute('disabled') !== null;
+    const { valorCarta } = target.dataset;
+    const cartaEncontrada = target.dataset.cartaEncontrada === 'true';
 
-    if (disabled) {
+    if (cartaEncontrada) {
       return;
     }
 
     const mov = [...movimentos];
     if (movimentos[0] === null) {
-      mov[0] = carta;
-    } else if (movimentos[1] === null && movimentos[0] !== carta) {
-      mov[1] = carta;
+      mov[0] = valorCarta;
+    } else if (movimentos[1] === null && movimentos[0] !== valorCarta) {
+      mov[1] = valorCarta;
     }
     movimentos = mov;
 
@@ -43,8 +43,8 @@ export default function JogoDaMemoria() {
         <Carta
           key={carta[0]}
           className="card"
-          value={carta[0]}
-          disabled={carta[2]}
+          data-valor-carta={carta[0]}
+          data-carta-encontrada={carta[2]}
           onClick={(e) => handleSelecionarCarta(e.target)}
         >
           {carta[0]} {carta[1]}
