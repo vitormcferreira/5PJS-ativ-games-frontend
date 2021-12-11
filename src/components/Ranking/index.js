@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaCircle } from 'react-icons/fa';
 import axios from '../../services/axios';
 import { TabelaRanking } from './styled';
 
@@ -22,12 +21,10 @@ export default function Ranking() {
   return (
     <TabelaRanking>
       <thead>
-        <tr>
-          <th>Ranking</th>
-          <th>
-            <FaCircle size={40} />
-          </th>
-        </tr>
+        <th>Ranking</th>
+        <th>
+          <span>{ranking.count}</span>
+        </th>
       </thead>
       <tbody>
         {ranking.results.map((rankUsuario) => (
@@ -36,6 +33,8 @@ export default function Ranking() {
             <td>{rankUsuario.erros}</td>
           </tr>
         ))}
+        {/* div para preencher o espaço */}
+        <div className="preencher-espaco" />
       </tbody>
     </TabelaRanking>
   );
