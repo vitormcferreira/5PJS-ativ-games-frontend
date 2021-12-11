@@ -10,7 +10,7 @@ import Index from '../pages/Index';
 export default function Routes() {
   return (
     <Switch>
-      <MyRoute exact path="/" component={Index} />
+      <MyRoute exact path="/" component={Index} isClosed />
       <MyRoute exact path="/login" component={Login} />
       <MyRoute exact path="/register" component={Register} />
       <MyRoute component={Page404} />
