@@ -16,12 +16,12 @@ const exibeErros = (errors) => {
 
 function* loginRequest({ payload }) {
   try {
-    const response = yield call(axios.post, '/tokens', payload);
+    const response = yield call(axios.post, '/accounts/login/', payload);
     yield put(actions.loginSuccess({ ...response.data }));
 
     toast.success('Você fez login');
 
-    axios.defaults.headers.Authorization = `Bearer ${response.data.token}`;
+    axios.defaults.headers.Authorization = `Token ${response.data.token}`;
 
     history.push(payload.prevPath);
   } catch (e) {
@@ -36,7 +36,7 @@ function persistRehydrate({ payload }) {
 
   if (!token) return;
 
-  axios.defaults.headers.Authorization = `Bearer ${token}`;
+  axios.defaults.headers.Authorization = `Token ${token}`;
 }
 
 function* registerRequest({ payload }) {
@@ -49,7 +49,7 @@ function* registerRequest({ payload }) {
       return;
     }
 
-    const response = yield call(axios.post, '/users', payload);
+    const response = yield call(axios.post, '/accounts/register/', payload);
 
     yield put(actions.registerSuccess({ ...response.data }));
 
