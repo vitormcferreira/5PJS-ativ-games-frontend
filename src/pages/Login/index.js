@@ -11,12 +11,12 @@ export default function Login(props) {
 
   const prevPath = get(props, 'location.state.prevPath', '/');
 
-  const [email, setEmail] = React.useState('');
+  const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(actions.loginRequest({ email, password, prevPath }));
+    dispatch(actions.loginRequest({ username, password, prevPath }));
 
     // limpa a senha após tentar login
     setPassword('');
@@ -27,10 +27,10 @@ export default function Login(props) {
       <h1>Login</h1>
       <Form onSubmit={handleSubmit}>
         <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Seu e-mail"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Seu username"
         />
         <input
           type="password"
@@ -38,6 +38,7 @@ export default function Login(props) {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Sua senha"
         />
+        <button type="submit">Registrar</button>
         <button type="submit">Acessar</button>
       </Form>
     </Container>
