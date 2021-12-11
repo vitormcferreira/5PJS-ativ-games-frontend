@@ -14,4 +14,25 @@ export const Container = styled.section`
 
 export const Botoes = styled.div`
   grid-area: botoes;
+
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  button {
+    color: rgb(50, 50, 50);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 3px solid rgb(50, 50, 50);
+    font-weight: 500;
+    font-size: 18px;
+
+    &:hover {
+      background-color: rgb(50, 50, 50);
+      color: white;
+      cursor: pointer;
+    }
+  }
 `;

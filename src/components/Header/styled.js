@@ -8,6 +8,7 @@ export const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  font-size: 24px;
 
   a {
     color: ${colors.primarylightColor};
@@ -17,5 +18,6 @@ export const Nav = styled.nav`
   div {
     display: flex;
     gap: 20px;
+    font-size: 18px;
   }
 `;
