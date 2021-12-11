@@ -3,7 +3,7 @@ import * as colors from '../../config/colors';
 
 export const Nav = styled.nav`
   grid-area: header;
-  background-color: ${colors.primaryDarkColor};
+  background-color: black;
   display: flex;
   justify-content: space-between;
   align-items: center;

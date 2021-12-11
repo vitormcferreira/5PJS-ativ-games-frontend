@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { get } from 'lodash';
 
-import { Container } from '../../styles/GlobalStyles';
-import { Form } from './styled';
+import { Form, Container } from './styled';
+import Header from '../../components/Header';
 import * as actions from '../../store/modules/auth/actions';
 
 export default function Login(props) {
@@ -23,23 +23,28 @@ export default function Login(props) {
   };
 
   return (
-    <Container>
-      <h1>Login</h1>
-      <Form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Seu e-mail"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Sua senha"
-        />
-        <button type="submit">Acessar</button>
-      </Form>
-    </Container>
+    <div className="fundo">
+      <Header />
+      <Container>
+        <h1>LOGIN</h1>
+        <Form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Seu e-mail"
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Sua senha"
+          />
+          <button type="submit">ENTRAR</button>
+          <p>Não possui uma conta?</p>
+          <a href="/register">Clique aqui para criar!</a>
+        </Form>
+      </Container>
+    </div>
   );
 }

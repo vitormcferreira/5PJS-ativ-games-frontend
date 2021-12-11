@@ -1,6 +1,6 @@
 export const primaryColor = '#C3073F';
 export const primarylightColor = '#FFFFFF';
-export const primaryDarkColor = '#1A1A1D';
+export const primaryDarkColor = '#3A3A3A';
 
 export const sucessColor = '#0197F6';
 export const infoColor = '#0197F6';

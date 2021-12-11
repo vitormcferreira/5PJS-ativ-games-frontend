@@ -11,12 +11,12 @@ export const TabelaRanking = styled.table`
   thead {
     background-color: ${colors.primarylightColor};
     th {
-      padding: 60px 0;
       font-size: 20px;
+      height: 70px;
       span {
         width: fit-content;
         height: fit-content;
-        padding: 5px;
+        padding: 5px 13px;
         border-radius: 30px;
         background-color: black;
         color: white;
@@ -26,9 +26,9 @@ export const TabelaRanking = styled.table`
 
   tbody tr {
     font-size: 18px;
-    background-color: #eee;
+    background-color: #bbb;
     &:nth-child(2n) {
-      background-color: #bbb;
+      background-color: #eee;
     }
     height: 40px;
     max-height: 30px;

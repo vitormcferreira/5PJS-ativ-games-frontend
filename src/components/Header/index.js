@@ -9,7 +9,7 @@ export default function Header() {
     <Nav>
       <Link to="/">JOGO DA MEMÓRIA</Link>
       <div>
-        <Link to="/decks">DECKS</Link>
+        <Link to="/login">LOGOUT</Link>
         <Link to="/sobre">SOBRE</Link>
       </div>
     </Nav>

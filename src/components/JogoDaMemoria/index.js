@@ -46,21 +46,31 @@ export default function JogoDaMemoria() {
       {/* carta[0] => valor da carta (número único)
           carta[1] => número da carta (identifica um par)
           carta[2] => se ela foi encontrada (bool) */}
-      {jogo.parsed_cartas.map((carta) => (
-        <Carta key={carta[0]} className="card">
-          {carta[1] !== null ? (
-            <img alt="" src={imagens[carta[1]].url} />
-          ) : (
-            <></>
-          )}
-          <div
-            data-valor-carta={carta[0]}
-            data-carta-encontrada={carta[2]}
-            onClick={(e) => handleSelecionarCarta(e.target)}
-            className="overlay"
-          />
-        </Carta>
-      ))}
+      {jogo.parsed_cartas.map((carta) => {
+        if (carta[1] !== null) {
+          return (
+            <Carta key={carta[0]} className="card" cor={imagens[carta[1]].cor}>
+              <img alt="" src={imagens[carta[1]].url} />
+              <div
+                data-valor-carta={carta[0]}
+                data-carta-encontrada={carta[2]}
+                onClick={(e) => handleSelecionarCarta(e.target)}
+                className="overlay"
+              />
+            </Carta>
+          );
+        }
+        return (
+          <Carta key={carta[0]} className="card">
+            <div
+              data-valor-carta={carta[0]}
+              data-carta-encontrada={carta[2]}
+              onClick={(e) => handleSelecionarCarta(e.target)}
+              className="overlay"
+            />
+          </Carta>
+        );
+      })}
     </Cartas>
   );
 }
