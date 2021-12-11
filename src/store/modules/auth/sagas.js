@@ -43,7 +43,7 @@ function* registerRequest({ payload }) {
   try {
     const validado = validadores.validaRegister(payload);
 
-    if (validado.errors) {
+    if (Object.values(validado.errors).length > 0) {
       exibeErros(validado.errors);
       yield put(actions.registerFailure());
       return;
@@ -56,7 +56,7 @@ function* registerRequest({ payload }) {
     toast.success('Usuário criado com sucesso');
     history.push('/login');
   } catch (e) {
-    const errors = get(e, 'response.data.errors', {});
+    const errors = get(e, 'response.data', {});
 
     exibeErros(errors);
     yield put(actions.registerFailure());
