@@ -31,6 +31,5 @@ export const TabelaRanking = styled.table`
       background-color: #bbb;
     }
     height: 40px;
-    max-height: 30px;
   }
 `;
