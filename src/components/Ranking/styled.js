@@ -32,4 +32,8 @@ export const TabelaRanking = styled.table`
     }
     height: 40px;
   }
+
+  .preencher-espaco {
+    height: 100%;
+  }
 `;
