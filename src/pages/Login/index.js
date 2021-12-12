@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { get } from 'lodash';
 
+import { Link } from 'react-router-dom';
 import { Form, Container } from './styled';
 import Header from '../../components/Header';
 import * as actions from '../../store/modules/auth/actions';
@@ -42,7 +43,7 @@ export default function Login(props) {
           />
           <button type="submit">ENTRAR</button>
           <p>Não possui uma conta?</p>
-          <a href="/register">Clique aqui para criar!</a>
+          <Link to="/register">Clique aqui para criar!</Link>
         </Form>
       </Container>
     </div>
