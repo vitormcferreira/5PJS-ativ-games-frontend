@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { isEmail } from 'validator';
 
 const initFormErrors = (errors) => {
@@ -39,6 +40,20 @@ const validaSobrenome = (sobrenome) => {
   return null;
 };
 
+const validaUsername = (username) => {
+  const errors = [];
+  if (!username) {
+    errors.push('Username deve ser enviado');
+  } else if (username.length < 8 || username.length > 255) {
+    errors.push('Username deve ter entre 8 e 255 caracteres');
+  }
+
+  if (errors.length > 0) {
+    return { username: errors };
+  }
+  return null;
+};
+
 const validaEmail = (email) => {
   const errors = [];
   if (!email) {
@@ -57,8 +72,8 @@ const validaPassword = (password) => {
   const errors = [];
   if (!password) {
     errors.push('Senha deve ser enviada');
-  } else if (password.length < 3 || password.length > 255) {
-    errors.push('Senha deve ter entre 6 e 50 caracteres');
+  } else if (password.length < 8 || password.length > 255) {
+    errors.push('Senha deve ter entre 8 e 255 caracteres');
   }
 
   if (errors.length > 0) {
@@ -70,9 +85,7 @@ const validaPassword = (password) => {
 export function validaRegister(campos) {
   // gera os erros
   const formErrors = initFormErrors([
-    validaNome(campos.nome),
-    validaSobrenome(campos.sobrenome),
-    validaEmail(campos.email),
+    validaUsername(campos.username),
     validaPassword(campos.password),
   ]);
 
@@ -81,7 +94,7 @@ export function validaRegister(campos) {
 
 export function validaLogin(campos) {
   const formErrors = initFormErrors([
-    validaEmail(campos.email),
+    validaUsername(campos.username),
     validaPassword(campos.password),
   ]);
 
