@@ -41,5 +41,6 @@ export const Form = styled.form`
     width: 200px;
     border: none;
     border-radius: 0 30px 0 30px;
+    cursor: pointer;
   }
 `;
