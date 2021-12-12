@@ -7,6 +7,12 @@ const initialState = {
     acertos: 0,
     parsed_cartas: [],
   },
+  ranking: {
+    count: 0,
+    next: '',
+    previous: '',
+    results: [],
+  },
 };
 
 export default function reducer(state = initialState, action) {
@@ -31,11 +37,32 @@ export default function reducer(state = initialState, action) {
     }
 
     case types.FAZER_MOVIMENTO_SUCCESS: {
-      return { ...action.payload };
+      return {
+        ...state,
+        jogo: action.payload.jogo,
+      };
     }
 
     case types.FAZER_MOVIMENTO_FAILURE: {
-      return { ...action.payload };
+      return {
+        ...state,
+        jogo: action.payload.jogo,
+      };
+    }
+
+    case types.GET_RANKING_REQUEST: {
+      return { ...state };
+    }
+
+    case types.GET_RANKING_SUCCESS: {
+      return {
+        ...state,
+        ranking: action.payload,
+      };
+    }
+
+    case types.GET_RANKING_FAILURE: {
+      return { ...state };
     }
 
     default: {

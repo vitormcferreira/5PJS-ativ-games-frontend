@@ -1,22 +1,15 @@
 import React from 'react';
-import axios from '../../services/axios';
+import { useDispatch, useSelector } from 'react-redux';
 import { TabelaRanking } from './styled';
+import * as actions from '../../store/modules/jogo/actions';
 
 export default function Ranking() {
-  const [ranking, setRanking] = React.useState({
-    count: 0,
-    next: '',
-    previous: '',
-    results: [],
-  });
+  const ranking = useSelector((state) => state.jogo.ranking);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    const obterRankings = async () => {
-      const response = await axios.get('jogo_da_memoria/ranking/');
-      setRanking(response.data);
-    };
-    obterRankings();
-  }, []);
+    dispatch(actions.getRankingRequest());
+  }, [dispatch]);
 
   return (
     <TabelaRanking>

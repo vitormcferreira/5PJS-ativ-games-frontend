@@ -43,3 +43,25 @@ export function fazerMovimentoFailure(payload) {
     payload,
   };
 }
+
+// obter ranking
+export function getRankingRequest(payload) {
+  return {
+    type: types.GET_RANKING_REQUEST,
+    payload,
+  };
+}
+
+export function getRankingSuccess(payload) {
+  return {
+    type: types.GET_RANKING_SUCCESS,
+    payload,
+  };
+}
+
+export function getRankingFailure(payload) {
+  return {
+    type: types.GET_RANKING_FAILURE,
+    payload,
+  };
+}
