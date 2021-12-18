@@ -6,6 +6,7 @@ import JogoDaMemoria from '../../components/JogoDaMemoria';
 import Movimentos from '../../components/Movimentos';
 import Ranking from '../../components/Ranking';
 import Header from '../../components/Header';
+import Win from '../../components/Win';
 import * as actions from '../../store/modules/jogo/actions';
 
 export default function Index() {
@@ -26,6 +27,7 @@ export default function Index() {
       <Movimentos />
       <Ranking />
       <JogoDaMemoria />
+      <Win handleReiniciar={handleReiniciar} />
       <Botoes>
         <button type="button">Mudar tema</button>
         <button type="button" onClick={handleReiniciar}>
