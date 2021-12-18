@@ -1,57 +1,70 @@
-/* eslint-disable camelcase */
 import * as types from '../types';
 
 const initialState = {
   jogo: {
     jogadas: 0,
     acertos: 0,
-    parsed_cartas: [],
+    cartas: [],
+    carta_anterior: null,
+    carta_posterior: null,
   },
   ranking: {
-    count: 0,
-    next: '',
-    previous: '',
     results: [],
   },
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case types.NOVO_JOGO_REQUEST: {
-      return { ...state };
-    }
-
     case types.NOVO_JOGO_SUCCESS: {
       return {
         ...state,
-        jogo: action.payload.jogo,
+        jogo: action.payload,
       };
-    }
-
-    case types.NOVO_JOGO_FAILURE: {
-      return { ...state };
-    }
-
-    case types.FAZER_MOVIMENTO_REQUEST: {
-      return { ...state };
     }
 
     case types.FAZER_MOVIMENTO_SUCCESS: {
+      const newJogo = {
+        ...state.jogo,
+        ...action.payload,
+      };
+
+      if (newJogo.carta_posterior) {
+        newJogo.jogadas += 1;
+
+        const cartasIguais =
+          newJogo.carta_anterior.valor_carta ===
+          newJogo.carta_posterior.valor_carta;
+
+        if (cartasIguais) {
+          newJogo.acertos += 1;
+          newJogo.cartas = newJogo.cartas.map((el) => {
+            if (el.carta === newJogo.carta_anterior.carta) {
+              return newJogo.carta_anterior;
+            }
+            if (el.carta === newJogo.carta_posterior.carta) {
+              return newJogo.carta_posterior;
+            }
+            return el;
+          });
+        }
+      }
+
       return {
         ...state,
-        jogo: action.payload.jogo,
+        jogo: newJogo,
       };
     }
 
-    case types.FAZER_MOVIMENTO_FAILURE: {
+    case types.LIMPAR_CARTAS_SELECIONADAS: {
+      const newJogo = {
+        ...state.jogo,
+        carta_anterior: null,
+        carta_posterior: null,
+      };
       return {
         ...state,
-        jogo: action.payload.jogo,
+        jogo: newJogo,
       };
-    }
-
-    case types.GET_RANKING_REQUEST: {
-      return { ...state };
     }
 
     case types.GET_RANKING_SUCCESS: {
@@ -59,10 +72,6 @@ export default function reducer(state = initialState, action) {
         ...state,
         ranking: action.payload,
       };
-    }
-
-    case types.GET_RANKING_FAILURE: {
-      return { ...state };
     }
 
     default: {

@@ -1,4 +1,4 @@
-import { call, put, all, takeLatest } from 'redux-saga/effects';
+import { call, put, all, delay, select, takeLeading } from 'redux-saga/effects';
 import _ from 'lodash';
 import * as actions from './actions';
 import * as types from '../types';
@@ -21,17 +21,35 @@ function* novoJogoRequest({ payload }) {
 
 function* fazerMovimentoRequest({ payload }) {
   try {
-    const response = yield call(axios.post, 'jogo_da_memoria/', {
-      carta1: payload.carta1,
-      carta2: payload.carta2,
-    });
-    yield put(actions.fazerMovimentoSuccess({ ...response.data }));
+    const { carta } = payload;
+    const response = yield call(axios.post, 'jogo_da_memoria/', { carta });
 
-    // status=250 => jogo encerrado
-    if (response.status === 250) {
-      // atualiza o ranking
-      yield put(actions.getRankingRequest());
+    const isPrimeiraCarta = !(yield select(
+      (state) => state.jogo.jogo.carta_anterior
+    ));
+
+    if (isPrimeiraCarta) {
+      yield put(
+        actions.fazerMovimentoSuccess({
+          carta_anterior: { carta, ...response.data },
+        })
+      );
+      return;
     }
+    yield put(
+      actions.fazerMovimentoSuccess({
+        carta_posterior: { carta, ...response.data },
+      })
+    );
+
+    // jogo encerrado
+    if (response.status === 250) {
+      yield put(actions.getRankingRequest());
+    } else if (response.status !== 240) {
+      // carta correta
+      yield delay(2000);
+    }
+    yield put(actions.limparCartasSelecionadas());
   } catch (e) {
     yield put(actions.fazerMovimentoFailure({ ...e.response.data }));
   }
@@ -47,7 +65,7 @@ function* getRankingRequest() {
 }
 
 export default all([
-  takeLatest(types.NOVO_JOGO_REQUEST, novoJogoRequest),
-  takeLatest(types.FAZER_MOVIMENTO_REQUEST, fazerMovimentoRequest),
-  takeLatest(types.GET_RANKING_REQUEST, getRankingRequest),
+  takeLeading(types.NOVO_JOGO_REQUEST, novoJogoRequest),
+  takeLeading(types.FAZER_MOVIMENTO_REQUEST, fazerMovimentoRequest),
+  takeLeading(types.GET_RANKING_REQUEST, getRankingRequest),
 ]);

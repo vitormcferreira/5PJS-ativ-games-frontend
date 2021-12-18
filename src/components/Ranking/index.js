@@ -17,14 +17,14 @@ export default function Ranking() {
         <tr>
           <th>Ranking</th>
           <th>
-            <span>{ranking.count}</span>
+            <span>10</span>
           </th>
         </tr>
       </thead>
       <tbody>
         {ranking.results.map((rankUsuario) => (
-          <tr key={rankUsuario.id}>
-            <td>{rankUsuario.user_data.username}</td>
+          <tr key={rankUsuario.username}>
+            <td>{rankUsuario.username}</td>
             <td>{rankUsuario.erros}</td>
           </tr>
         ))}

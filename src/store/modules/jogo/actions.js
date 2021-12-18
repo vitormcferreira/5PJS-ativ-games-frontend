@@ -37,6 +37,13 @@ export function fazerMovimentoSuccess(payload) {
   };
 }
 
+export function limparCartasSelecionadas(payload) {
+  return {
+    type: types.LIMPAR_CARTAS_SELECIONADAS,
+    payload,
+  };
+}
+
 export function fazerMovimentoFailure(payload) {
   return {
     type: types.FAZER_MOVIMENTO_FAILURE,
