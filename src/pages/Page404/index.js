@@ -1,7 +1,6 @@
 import React from 'react';
 
-import './styled';
-import { Container } from '../../styles/GlobalStyles';
+import { Container } from './styled';
 
 export default function Page404() {
   return (
