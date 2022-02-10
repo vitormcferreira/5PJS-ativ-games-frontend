@@ -1,6 +1,6 @@
 # 5PJS-ativ-games
 
-Projeto proposto pelo professor Ricardo Marciano na disciplina de 5PJS na FAETERJ-Rio.
+Projeto proposto pelo professor Ricardo Marciano na disciplina de 5PJS na FAETERJ-Rio. O backend da aplicação está disponível em [backend](https://github.com/vitormcferreira/5PJS-ativ-games-backend)
 
 Desenvolvido em conjunto com [Andressa Silva](https://github.com/AuroraDark), o projeto consiste em um jogo da memória com comunicação cliente-servidor, onde a configuração do jogo (posição das cartas, etc) ficam presentes no servidor enquanto o cliente faz requisições Ajax para obter as informações.
 
