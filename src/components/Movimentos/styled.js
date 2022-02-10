@@ -4,6 +4,7 @@ export const MovimentosSection = styled.section`
   grid-area: movimentos;
   font-family: 'Ubuntu', sans-serif;
   font-size: 20px;
+  font-weight: bold;
   margin-left: 53px;
   display: flex;
   align-items: center;
